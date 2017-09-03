@@ -1,13 +1,18 @@
 use std::io::{self, Read};
 use std::env;
+use std::process;
 
 fn main() {
-    let mut buffer = String::new();
-    io::stdin().read_to_string(&mut buffer);
-
     let args: Vec<String> = env::args().collect();
+    if args.len() < 3 {
+        println!("two arguments required");
+        process::exit(0);
+    } else {
+        let mut buffer = String::new();
+        io::stdin().read_to_string(&mut buffer);
 
-    print_extract(buffer.as_str(), &args[1], &args[2]);
+        print_extract(buffer.as_str(), &args[1], &args[2]);
+    }
 }
 
 fn print_extract(txt: &str, a: &String, b: &String) {
